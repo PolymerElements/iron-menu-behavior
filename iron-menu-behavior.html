@@ -10,6 +10,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <link rel="import" href="../polymer/polymer.html">
 <link rel="import" href="../iron-selector/iron-multi-selectable.html">
+<link rel="import" href="../iron-a11y-keys-behavior/iron-a11y-keys-behavior.html">
 
 <!--
 `Polymer.IronMenuBehavior` implements accessible menu behavior.
@@ -45,7 +46,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       attrForItemTitle: {
         type: String
       }
-
     },
 
     hostAttributes: {
@@ -56,6 +56,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     listeners: {
       'focus': '_onFocus',
       'keydown': '_onKeydown'
+    },
+
+    keyBindings: {
+      'up': '_onUpKey',
+      'down': '_onDownKey',
+      'esc': '_onEscKey',
+      'enter': '_onEnterKey'
     },
 
     _focusedItemChanged: function(focusedItem, old) {
@@ -94,35 +101,48 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }, 100);
     },
 
+    _onUpKey: function() {
+      // up and down arrows moves the focus
+      this._focusPrevious();
+    },
+
+    _onDownKey: function() {
+      this._focusNext();
+    },
+
+    _onEscKey: function() {
+      // esc blurs the control
+      this.focusedItem.blur();
+    },
+
+    _onEnterKey: function(event) {
+      // enter activates the item unless it is disabled
+      this._activateFocused(event.detail.keyboardEvent);
+    },
+
     _onKeydown: function(event) {
-      // FIXME want to define these somewhere, core-a11y-keys?
-      var DOWN = 40;
-      var UP = 38;
-      var ESC = 27;
-      var ENTER = 13;
-      if (event.keyCode === DOWN) {
-        // up and down arrows moves the focus
-        this._focusNext();
-      } else if (event.keyCode === UP) {
-        this._focusPrevious();
-      } else if (event.keyCode === ESC) {
-        // esc blurs the control
-        this.focusedItem.blur();
-      } else if (event.keyCode === ENTER) {
-        // enter activates the item unless it is disabled
-        if (!this.focusedItem.hasAttribute('disabled')) {
-          this._activateHandler(event);
+      if (this.keyboardEventMatchesKeys(event, 'up down esc enter')) {
+        return;
+      }
+
+      // all other keys focus the menu item starting with that character
+      this._focusWithKeyboardEvent(event);
+    },
+
+    _focusWithKeyboardEvent: function(event) {
+      for (var i = 0, item; item = this.items[i]; i++) {
+        var attr = this.attrForItemTitle || 'textContent';
+        var title = item[attr] || item.getAttribute(attr);
+        if (title && title.trim().charAt(0).toLowerCase() === String.fromCharCode(event.keyCode).toLowerCase()) {
+          this._setFocusedItem(item);
+          break;
         }
-      } else {
-        // all other keys focus the menu item starting with that character
-        for (var i = 0, item; item = this.items[i]; i++) {
-          var attr = this.attrForItemTitle || 'textContent';
-          var title = item[attr] || item.getAttribute(attr);
-          if (title && title.trim().charAt(0).toLowerCase() === String.fromCharCode(event.keyCode).toLowerCase()) {
-            this._setFocusedItem(item);
-            break;
-          }
-        }
+      }
+    },
+
+    _activateFocused: function(event) {
+      if (!this.focusedItem.hasAttribute('disabled')) {
+        this._activateHandler(event);
       }
     },
 
@@ -137,6 +157,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this._setFocusedItem(this.items[index]);
     }
 
-  }].concat(Polymer.IronMultiSelectableBehavior);
+  }].concat(
+    Polymer.IronMultiSelectableBehavior,
+    Polymer.IronA11yKeysBehavior
+  );
 
 </script>

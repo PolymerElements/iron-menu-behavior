@@ -79,6 +79,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         this._defaultFocusAsync = null;
       }
       var item = this._valueToItem(value);
+      if (item && item.hasAttribute('disabled')) return;
       this._setFocusedItem(item);
       Polymer.IronMultiSelectableBehavior[0].select.call(this, value);
     },

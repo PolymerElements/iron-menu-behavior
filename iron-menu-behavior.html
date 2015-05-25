@@ -18,8 +18,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
 <script>
 
-  /** @polymerBehavior */
-  Polymer.IronMenuBehavior = [{
+  Polymer.IronMenuBehaviorImpl = {
 
     properties: {
 
@@ -53,6 +52,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       'tabindex': '0'
     },
 
+    observers: [
+      '_updateMultiselectable(multi)'
+    ],
+
     listeners: {
       'focus': '_onFocus',
       'keydown': '_onKeydown'
@@ -62,7 +65,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       'up': '_onUpKey',
       'down': '_onDownKey',
       'esc': '_onEscKey',
-      'enter': '_onEnterKey'
+      'enter': '_onEnterKey',
+      'shift+tab:keydown': '_onShiftTabDown'
+    },
+
+    _updateMultiselectable: function(multi) {
+      if (multi) {
+        this.setAttribute('aria-multiselectable', 'true');
+      } else {
+        this.removeAttribute('aria-multiselectable');
+      }
+    },
+
+    _onShiftTabDown: function() {
+      var oldTabIndex;
+
+      Polymer.IronMenuBehaviorImpl._shiftTabPressed = true;
+
+      oldTabIndex = this.getAttribute('tabindex');
+
+      this.setAttribute('tabindex', '-1');
+
+      this.async(function() {
+        this.setAttribute('tabindex', oldTabIndex);
+        Polymer.IronMenuBehaviorImpl._shiftTabPressed = false;
+      // Note: polymer/polymer#1305
+      }, 1);
+    },
+
+    _applySelection: function(item, isSelected) {
+      if (isSelected) {
+        item.setAttribute('aria-selected', 'true');
+      } else {
+        item.removeAttribute('aria-selected');
+      }
+
+      Polymer.IronSelectableBehavior._applySelection.apply(this, arguments);
     },
 
     _focusedItemChanged: function(focusedItem, old) {
@@ -80,10 +118,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
       var item = this._valueToItem(value);
       this._setFocusedItem(item);
-      Polymer.IronMultiSelectableBehavior[0].select.call(this, value);
+      Polymer.IronMultiSelectableBehaviorImpl.select.apply(this, arguments);
     },
 
     _onFocus: function(event) {
+      if (Polymer.IronMenuBehaviorImpl._shiftTabPressed) {
+        return;
+      }
       // do not focus the menu itself
       this.blur();
       // clear the cached focus item
@@ -157,9 +198,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this._setFocusedItem(this.items[index]);
     }
 
-  }].concat(
+  };
+
+  Polymer.IronMenuBehaviorImpl._shiftTabPressed = false;
+
+  /** @polymerBehavior */
+  Polymer.IronMenuBehavior = [
     Polymer.IronMultiSelectableBehavior,
-    Polymer.IronA11yKeysBehavior
-  );
+    Polymer.IronA11yKeysBehavior,
+    Polymer.IronMenuBehaviorImpl
+  ];
 
 </script>

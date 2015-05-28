@@ -1,13 +1,11 @@
 {
   "name": "iron-menu-behavior",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Provides accessible menu behavior",
   "authors": "The Polymer Authors",
   "keywords": [
     "web-components",
-    "web-component",
     "polymer",
-    "iron",
     "behavior",
     "menu"
   ],

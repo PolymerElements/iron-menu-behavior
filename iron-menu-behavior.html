@@ -179,9 +179,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       }
     },
 
+    // trigger a synthetic event tap event from the keypress
+    // so that the common tap event interface across behaviors and components functions correctly
     _activateFocused: function(event) {
       if (!this.focusedItem.hasAttribute('disabled')) {
-        this._activateHandler(event);
+        Polymer.Gestures.fire(Polymer.Gestures.findOriginalTarget(event), 'tap', {
+            x: event.x,
+            y: event.y,
+            sourceEvent: event
+        });
       }
     },
 

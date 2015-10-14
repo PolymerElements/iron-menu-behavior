@@ -39,12 +39,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       event.detail.keyboardEvent.preventDefault();
     },
 
-    _onLeftKey: function() {
+    _onLeftKey: function(event) {
       this._focusPrevious();
+      event.detail.keyboardEvent.stopPropagation();
     },
 
-    _onRightKey: function() {
+    _onRightKey: function(event) {
       this._focusNext();
+      event.detail.keyboardEvent.stopPropagation();
     },
 
     _onKeydown: function(event) {

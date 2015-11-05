@@ -72,7 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var menu = fixture('basic');
           MockInteractions.focus(menu);
           setTimeout(function() {
-            assert.equal(document.activeElement, menu.firstElementChild, 'document.activeElement is first item')
+            assert.equal(document.activeElement, menu.firstElementChild, 'document.activeElement is first item');
             done();
           // wait for async in _onFocus
           }, 200);
@@ -84,6 +84,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           MockInteractions.focus(menu);
           setTimeout(function() {
             assert.equal(document.activeElement, menu.selectedItem, 'document.activeElement is selected item');
+            done();
+          // wait for async in _onFocus
+          }, 200);
+        });
+
+        test('focusing non-item content does not auto-focus an item', function(done) {
+          var menu = fixture('basic');
+          menu.extraContent.focus();
+          setTimeout(function() {
+            var menuActiveElement = Polymer.dom(menu.root).querySelector('*:focus');
+            assert.equal(menuActiveElement, menu.extraContent, 'menu.extraContent is focused');
             done();
           // wait for async in _onFocus
           }, 200);

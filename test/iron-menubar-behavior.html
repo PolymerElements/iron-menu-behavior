@@ -87,6 +87,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           }, 200);
         });
 
+        test('focusing non-item content does not auto-focus an item', function(done) {
+          var menubar = fixture('basic');
+          menubar.extraContent.focus();
+          setTimeout(function() {
+            var menubarActiveElement = Polymer.dom(menubar.root).querySelector('*:focus');
+            assert.equal(menubarActiveElement, menubar.extraContent, 'menubar.extraContent is focused');
+            done();
+          // wait for async in _onFocus
+          }, 200);
+        });
+
         test('last activated item in a multi select menubar is focused', function(done) {
           var menubar = fixture('multi');
           menubar.selected = 0;

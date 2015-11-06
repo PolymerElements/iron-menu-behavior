@@ -40,11 +40,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     get _isRTL() {
-      var child = document.createElement('span');
-      this.root.appendChild(child);
-      var result = Polymer.DomApi.matchesSelector.call(child, ':host-context([dir=rtl]) span');
-      this.root.removeChild(child);
-      return result;
+      return window.getComputedStyle(this)['direction'] === 'rtl';
     },
 
     _onLeftKey: function() {

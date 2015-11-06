@@ -19,7 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../iron-test-helpers/mock-interactions.js"></script>
+    <link rel="import" href="../../iron-test-helpers/iron-test-helpers.html">
     <link rel="import" href="test-menubar.html">
 
   </head>
@@ -42,6 +42,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div>item 2</div>
           <div>item 3</div>
         </test-menubar>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="rtl">
+      <template>
+        <div dir="rtl">
+          <test-menubar>
+            <div>item 1</div>
+            <div>item 2</div>
+            <div>item 3</div>
+          </test-menubar>
+        </div>
       </template>
     </test-fixture>
 
@@ -95,6 +107,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             done();
           // wait for async in _onFocus
           }, 200);
+        });
+
+        suite('left / right keys are reversed when the menubar has RTL directionality', function() {
+          var LEFT = 37;
+          var RIGHT = 39;
+
+          test('left key moves to the next item', function(done) {
+            var rtlContainer = fixture('rtl');
+            var menubar = rtlContainer.querySelector('test-menubar');
+            menubar.selected = 0;
+            menubar.items[1].click();
+            setTimeout(function() {
+              MockInteractions.pressAndReleaseKeyOn(menubar, LEFT);
+              setTimeout(function() {
+                assert.equal(document.activeElement, menubar.items[2], 'document.activeElement is next item');
+                done();
+              // wait for async in _onFocus
+              }, 200);
+            // wait for async in _onFocus
+            }, 200);
+          });
+
+          test('right key moves to the previous item', function(done) {
+            var rtlContainer = fixture('rtl');
+            var menubar = rtlContainer.querySelector('test-menubar');
+            menubar.selected = 0;
+            menubar.items[1].click();
+            setTimeout(function() {
+              MockInteractions.pressAndReleaseKeyOn(menubar, RIGHT);
+              setTimeout(function() {
+                assert.equal(document.activeElement, menubar.items[0], 'document.activeElement is previous item');
+                done();
+              // wait for async in _onFocus
+              }, 200);
+            // wait for async in _onFocus
+            }, 200);
+          });
         });
 
       });

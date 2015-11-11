@@ -93,7 +93,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var menu = fixture('basic');
           menu.extraContent.focus();
           setTimeout(function() {
-            var menuActiveElement = Polymer.dom(menu.root).querySelector('*:focus');
+            var menuOwnerRoot = Polymer.dom(menu.extraContent).getOwnerRoot() || document;
+            var menuActiveElement = Polymer.dom(menuOwnerRoot).activeElement;
             assert.equal(menuActiveElement, menu.extraContent, 'menu.extraContent is focused');
             done();
           // wait for async in _onFocus

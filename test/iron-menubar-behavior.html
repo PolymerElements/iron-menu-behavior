@@ -91,9 +91,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var menubar = fixture('basic');
           menubar.extraContent.focus();
           setTimeout(function() {
-            var menubarOwnerRoot = Polymer.dom(menubar.extraContent).getOwnerRoot() || document;
-            var menubarActiveElement = Polymer.dom(menubarOwnerRoot).activeElement;
-            assert.equal(menubarActiveElement, menubar.extraContent, 'menubar.extraContent is focused');
+            var ownerRoot = Polymer.dom(menubar.extraContent).getOwnerRoot() || document;
+            var activeElement = Polymer.dom(ownerRoot).activeElement;
+            assert.equal(activeElement, menubar.extraContent, 'menubar.extraContent is focused');
+            assert.equal(Polymer.dom(document).activeElement, menubar, 'menubar is document.activeElement');
             done();
           // wait for async in _onFocus
           }, 200);

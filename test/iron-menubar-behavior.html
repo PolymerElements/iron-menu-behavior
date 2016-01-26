@@ -19,6 +19,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
+    <script src="../../iron-test-helpers/mock-interactions.js"></script>
     <link rel="import" href="test-menubar.html">
 
   </head>
@@ -55,7 +56,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         test('first item gets focus when menubar is focused', function(done) {
           var menubar = fixture('basic');
-          menubar.focus();
+          MockInteractions.focus(menubar);
           setTimeout(function() {
             assert.equal(document.activeElement, menubar.firstElementChild, 'document.activeElement is first item')
             done();
@@ -66,7 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         test('selected item gets focus when menubar is focused', function(done) {
           var menubar = fixture('basic');
           menubar.selected = 1;
-          menubar.focus();
+          MockInteractions.focus(menubar);
           setTimeout(function() {
             assert.equal(document.activeElement, menubar.selectedItem, 'document.activeElement is selected item');
             done();

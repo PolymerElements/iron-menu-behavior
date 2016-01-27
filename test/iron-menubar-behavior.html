@@ -70,7 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var menubar = fixture('basic');
           MockInteractions.focus(menubar);
           setTimeout(function() {
-            assert.equal(document.activeElement, menubar.firstElementChild, 'document.activeElement is first item')
+            assert.equal(Polymer.dom(document).activeElement, menubar.firstElementChild, 'document.activeElement is first item')
             done();
           // wait for async in _onFocus
           }, 200);
@@ -81,7 +81,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           menubar.selected = 1;
           MockInteractions.focus(menubar);
           setTimeout(function() {
-            assert.equal(document.activeElement, menubar.selectedItem, 'document.activeElement is selected item');
+            assert.equal(Polymer.dom(document).activeElement, menubar.selectedItem, 'document.activeElement is selected item');
             done();
           // wait for async in _onFocus
           }, 200);
@@ -92,7 +92,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           menubar.selected = 0;
           menubar.items[1].click();
           setTimeout(function() {
-            assert.equal(document.activeElement, menubar.items[1], 'document.activeElement is last activated item');
+            assert.equal(Polymer.dom(document).activeElement, menubar.items[1], 'document.activeElement is last activated item');
             done();
           // wait for async in _onFocus
           }, 200);
@@ -103,7 +103,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           menubar.selected = 0;
           menubar.items[0].click();
           setTimeout(function() {
-            assert.equal(document.activeElement, menubar.items[0], 'document.activeElement is last activated item');
+            assert.equal(Polymer.dom(document).activeElement, menubar.items[0], 'document.activeElement is last activated item');
             done();
           // wait for async in _onFocus
           }, 200);
@@ -121,7 +121,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             setTimeout(function() {
               MockInteractions.pressAndReleaseKeyOn(menubar, LEFT);
               setTimeout(function() {
-                assert.equal(document.activeElement, menubar.items[2], 'document.activeElement is next item');
+                assert.equal(Polymer.dom(document).activeElement, menubar.items[2],
+                    '`document.activeElement` should be the next item.');
+                assert.equal(menubar.selected, 1,
+                    '`menubar.selected` should not change.');
                 done();
               // wait for async in _onFocus
               }, 200);
@@ -137,7 +140,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             setTimeout(function() {
               MockInteractions.pressAndReleaseKeyOn(menubar, RIGHT);
               setTimeout(function() {
-                assert.equal(document.activeElement, menubar.items[0], 'document.activeElement is previous item');
+                assert.equal(Polymer.dom(document).activeElement, menubar.items[0],
+                    '`document.activeElement` should be the previous item');
+                assert.equal(menubar.selected, 1,
+                    '`menubar.selected` should not change.');
                 done();
               // wait for async in _onFocus
               }, 200);

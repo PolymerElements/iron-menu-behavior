@@ -23,7 +23,7 @@
   "ignore": [],
   "dependencies": {
     "iron-selector": "PolymerElements/iron-selector#^1.0.0",
-    "polymer": "Polymer/polymer#^1.0.0",
+    "polymer": "Polymer/polymer#^1.2.4",
     "iron-a11y-keys-behavior": "polymerelements/iron-a11y-keys-behavior#^1.0.0"
   },
   "devDependencies": {

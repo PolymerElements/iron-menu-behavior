@@ -118,18 +118,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var menubar = rtlContainer.querySelector('test-menubar');
             menubar.selected = 0;
             menubar.items[1].click();
-            setTimeout(function() {
-              MockInteractions.pressAndReleaseKeyOn(menubar, LEFT);
-              setTimeout(function() {
-                assert.equal(Polymer.dom(document).activeElement, menubar.items[2],
-                    '`document.activeElement` should be the next item.');
-                assert.equal(menubar.selected, 1,
-                    '`menubar.selected` should not change.');
-                done();
-              // wait for async in _onFocus
-              }, 200);
-            // wait for async in _onFocus
-            }, 200);
+
+            assert.equal(Polymer.dom(document).activeElement, menubar.items[1]);
+
+            MockInteractions.pressAndReleaseKeyOn(menubar, LEFT);
+
+            assert.equal(Polymer.dom(document).activeElement, menubar.items[2],
+                '`document.activeElement` should be the next item.');
+            assert.equal(menubar.selected, 1,
+                '`menubar.selected` should not change.');
+
+            done();
           });
 
           test('right key moves to the previous item', function(done) {
@@ -137,18 +136,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             var menubar = rtlContainer.querySelector('test-menubar');
             menubar.selected = 0;
             menubar.items[1].click();
-            setTimeout(function() {
-              MockInteractions.pressAndReleaseKeyOn(menubar, RIGHT);
-              setTimeout(function() {
-                assert.equal(Polymer.dom(document).activeElement, menubar.items[0],
-                    '`document.activeElement` should be the previous item');
-                assert.equal(menubar.selected, 1,
-                    '`menubar.selected` should not change.');
-                done();
-              // wait for async in _onFocus
-              }, 200);
-            // wait for async in _onFocus
-            }, 200);
+
+            assert.equal(Polymer.dom(document).activeElement, menubar.items[1]);
+
+            MockInteractions.pressAndReleaseKeyOn(menubar, RIGHT);
+
+            assert.equal(Polymer.dom(document).activeElement, menubar.items[0],
+                '`document.activeElement` should be the previous item');
+            assert.equal(menubar.selected, 1,
+                '`menubar.selected` should not change.');
+
+            done();
           });
         });
 

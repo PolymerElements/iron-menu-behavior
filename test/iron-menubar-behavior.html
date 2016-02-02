@@ -113,7 +113,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           var LEFT = 37;
           var RIGHT = 39;
 
-          test('left key moves to the next item', function(done) {
+          test('left key moves to the next item', function() {
             var rtlContainer = fixture('rtl');
             var menubar = rtlContainer.querySelector('test-menubar');
             menubar.selected = 0;
@@ -127,11 +127,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 '`document.activeElement` should be the next item.');
             assert.equal(menubar.selected, 1,
                 '`menubar.selected` should not change.');
-
-            done();
           });
 
-          test('right key moves to the previous item', function(done) {
+          test('right key moves to the previous item', function() {
             var rtlContainer = fixture('rtl');
             var menubar = rtlContainer.querySelector('test-menubar');
             menubar.selected = 0;
@@ -145,8 +143,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 '`document.activeElement` should be the previous item');
             assert.equal(menubar.selected, 1,
                 '`menubar.selected` should not change.');
-
-            done();
           });
         });
 

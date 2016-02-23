@@ -261,8 +261,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         } else {
           this._setFocusedItem(this.items[0]);
         }
-      // async 1ms to wait for `select` to get called from `_itemActivate`
-      }, 1);
+      });
     },
 
     /**

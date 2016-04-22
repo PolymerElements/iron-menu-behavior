@@ -128,7 +128,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var attr = this.attrForItemTitle || 'textContent';
         var title = item[attr] || item.getAttribute(attr);
 
-        if (!item.hasAttribute('disabled') && title && 
+        if (!item.hasAttribute('disabled') && title &&
             title.trim().charAt(0).toLowerCase() === String.fromCharCode(event.keyCode).toLowerCase()) {
           this._setFocusedItem(item);
           break;

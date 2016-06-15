@@ -35,6 +35,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       },
 
       /**
+       * If true, before an item is focused, that item is scrolled into view and
+       * positioned at the nearest edge of the menu.
+       */
+      scrollToFocusedItem: {
+        type: Boolean,
+        value: false
+      },
+
+      /**
        * The attribute to use on menu items to look up the item title. Typing the first
        * letter of an item when the menu is open focuses that item. If unset, `textContent`
        * will be used.
@@ -197,6 +206,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       old && old.setAttribute('tabindex', '-1');
       if (focusedItem) {
         focusedItem.setAttribute('tabindex', '0');
+
+        // TODO(bicknellr): Most of this can be removed once the
+        // ScrollIntoViewOptions argument type gets general support.
+        // https://drafts.csswg.org/cssom-view/#dom-element-scrollintoview
+        if (this.scrollToFocusedItem) {
+          var selfRect = this.getBoundingClientRect();
+          var focusedItemRect = focusedItem.getBoundingClientRect();
+          var topOutside = focusedItemRect.top < selfRect.top;
+          var bottomOutside =
+            (selfRect.top + selfRect.height) <
+            (focusedItemRect.top + focusedItemRect.height);
+          // If the item is already visible (topOutside === bottomOutside === false)
+          // or covering the entire menu area (... === true), don't scroll.
+          if (topOutside !== bottomOutside) {
+            // If the item is larger than the menu, always align to the top edge.
+            var itemTallerThanSelf = focusedItemRect.height > selfRect.height;
+            focusedItem.scrollIntoView(itemTallerThanSelf || topOutside);
+          }
+        }
+
         focusedItem.focus();
       }
     },

@@ -83,6 +83,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </template>
     </test-fixture>
 
+    <test-fixture id="scrolling">
+      <template>
+        <test-menu scroll-to-focused-item
+          style="display: block; max-height: 100px; overflow: auto;">
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+          <div large style="height: 500px;">item</div>
+          <div>item</div>
+          <div>item</div>
+          <div>item</div>
+        </test-menu>
+      </template>
+    </test-fixture>
+
     <script>
       suite('menu a11y tests', function() {
         test('menu has role="menu"', function() {
@@ -378,6 +406,123 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             assertTabIndexCounts(menu.items, {"-1": 5, "0": 1});
             done();
           });
+        });
+
+        suite('`scroll-to-focused-item`', function() {
+          var menu;
+
+          setup(function() {
+            menu = fixture('scrolling');
+          });
+
+          test('does not scroll if the item is already visible', function() {
+            var menuRect = menu.getBoundingClientRect();
+            var firstItem = menu.items[0];
+            var firstItemRect = firstItem.getBoundingClientRect();
+
+            assert.isAtLeast(firstItemRect.top, menuRect.top,
+              'First item top is below menu top.');
+            assert.isAtMost(
+              firstItemRect.top + firstItemRect.height,
+              menuRect.top + menuRect.height,
+              'First item bottom is above menu bottom.');
+
+            var startMenuScrollTop = menu.scrollTop;
+            menu.select(0);
+            assert.isAtMost(
+              Math.abs(menu.scrollTop - startMenuScrollTop), 1,
+              'Menu `scrollTop` is unchanged.');
+          });
+
+          test('scrolls to align the item to the bottom of the menu, if the ' +
+            'item is at least partially below the bounds of the menu',
+            function() {
+              var menuRect = menu.getBoundingClientRect();
+              var itemIndex = menu.items.length - 1;
+              var item = menu.items[itemIndex];
+              var itemRect = item.getBoundingClientRect();
+
+              assert.isAtLeast(
+                itemRect.top, menuRect.top,
+                'The item top is below the menu top.');
+              assert.isAtLeast(
+                itemRect.top + itemRect.height,
+                menuRect.top + menuRect.height,
+                'The item bottom is below the menu bottom.');
+              assert.isAtMost(itemRect.height, menuRect.height,
+                'The item is smaller than the menu.');
+
+              menu.select(itemIndex);
+
+              var menuRect = menu.getBoundingClientRect();
+              var itemRect = item.getBoundingClientRect();
+
+              var itemBottom = itemRect.top + itemRect.height;
+              var menuBottom = menuRect.top + menuRect.height;
+              assert.isAtMost(
+                Math.abs(itemBottom - menuBottom), 1,
+                'The item bottom is aligned to the bottom of the menu.');
+            });
+
+          test('scrolls to align the item to the top of the menu, if the ' +
+            'item is at least partially above the bounds of the menu',
+            function() {
+              var menuRect = menu.getBoundingClientRect();
+              var itemIndex = 0;
+              var item = menu.items[itemIndex];
+              var itemRect = item.getBoundingClientRect();
+
+              menu.scrollTop = menu.scrollHeight;
+
+              assert.isAtLeast(
+                menuRect.top, itemRect.top,
+                'The item top is above the menu top.');
+              assert.isAtLeast(
+                menuRect.top + menuRect.height,
+                itemRect.top + itemRect.height,
+                'The item bottom is above the menu bottom.');
+              assert.isAtMost(itemRect.height, menuRect.height,
+                'The item is smaller than the menu.');
+
+              menu.select(itemIndex);
+
+              var menuRect = menu.getBoundingClientRect();
+              var itemRect = item.getBoundingClientRect();
+
+              assert.isAtMost(
+                Math.abs(itemRect.top - menuRect.top), 1,
+                'The item top is aligned to the top of the menu.');
+            });
+
+          test('scrolls to align the item to the top of the menu, if the ' +
+            'item is below the menu bounds but larger than the menu',
+            function() {
+              var menuRect = menu.getBoundingClientRect();
+              var item = Polymer.dom(menu).querySelector('[large]');
+              var itemIndex = menu.items.indexOf(item);
+              var itemRect = item.getBoundingClientRect();
+
+              menu.scrollTop = menu.scrollHeight;
+
+              assert.isAtLeast(
+                itemRect.top, menuRect.top,
+                'The item top is below the menu top.');
+              assert.isAtLeast(
+                itemRect.top + itemRect.height,
+                menuRect.top + menuRect.height,
+                'The item bottom is below the menu bottom.');
+              assert.isAtLeast(itemRect.height, menuRect.height,
+                'The item is larger than the menu.');
+
+              menu.select(itemIndex);
+
+              var menuRect = menu.getBoundingClientRect();
+              var itemRect = item.getBoundingClientRect();
+
+              assert.isAtMost(
+                Math.abs(itemRect.top - menuRect.top), 1,
+                'The item top is aligned to the top of the menu.');
+            });
         });
       });
     </script>

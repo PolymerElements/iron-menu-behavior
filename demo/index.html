@@ -55,6 +55,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     .row {
       height: 120px;
     }
+
+    .scrolling {
+      max-width: 200px;
+      max-height: 300px;
+      overflow: auto;
+    }
+
+    .very-tall-item {
+      min-height: 350px;
+      background-color: #bfb;
+    }
   </style>
 </head>
 <body unresolved>
@@ -109,6 +120,42 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </div>
     </div>
 
+    <div>
+      <h3><code>scroll-to-focused-item</code></h3>
+      <div class="horizontal-section">
+        <simple-menu class="scrolling" scroll-to-focused-item>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem" disabled>Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem" class="very-tall-item">
+            Why is this item so big? All the blank space after this text and
+            before the next item is really confusing when scrolling down.
+          </a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem" disabled>Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem" disabled>Item</a>
+          <a href="javascript:void(0)" role="menuitem" disabled>Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem" disabled>Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem">Item</a>
+          <a href="javascript:void(0)" role="menuitem" disabled>Item</a>
+        </simple-menu>
+      </div>
+    </div>
   </div>
 </body>
 </html>

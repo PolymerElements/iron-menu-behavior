@@ -144,10 +144,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     _focusPrevious: function() {
       var length = this.items.length;
       var curFocusIndex = Number(this.indexOf(this.focusedItem));
-      var owner = Polymer.dom(this).getOwnerRoot() || document;
 
       for (var i = 1; i < length + 1; i++) {
         var item = this.items[(curFocusIndex - i + length) % length];
+        var owner = Polymer.dom(item).getOwnerRoot() || document;
         if (!item.hasAttribute('disabled')) {
           this._setFocusedItem(item);
 
@@ -168,11 +168,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     _focusNext: function() {
       var length = this.items.length;
       var curFocusIndex = Number(this.indexOf(this.focusedItem));
-      var owner = Polymer.dom(this).getOwnerRoot() || document;
 
       for (var i = 1; i < length + 1; i++) {
         var item = this.items[(curFocusIndex + i) % length];
-
+        var owner = Polymer.dom(item).getOwnerRoot() || document;
         if (!item.hasAttribute('disabled')) {
           this._setFocusedItem(item);
 

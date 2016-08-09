@@ -28,6 +28,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       .ghost, [hidden] {
         display: none;
       }
+      .invisible {
+        visibility: hidden;
+      }
     </style>
   </head>
   <body>
@@ -67,6 +70,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div>item 1</div>
           <div hidden>item 2</div>
           <div class="ghost">item 3</div>
+          <div class="invisible">item 3.1</div>
           <div>item 4</div>
           <div hidden>item 5</div>
           <div class="ghost">item 6</div>
@@ -184,7 +188,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             Polymer.Base.async(function() {
               var focusedItem = Polymer.dom(menu).node.focusedItem;
-              assert.equal(focusedItem, menu.items[3], 'menu.items[3] is focused');
+              assert.equal(focusedItem, menu.items[4], 'menu.items[4] is focused');
               done();
             });
           });
@@ -202,7 +206,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             Polymer.Base.async(function() {
               var focusedItem = Polymer.dom(menu).node.focusedItem;
-              assert.equal(focusedItem, menu.items[3], 'menu.items[3] is focused');
+              assert.equal(focusedItem, menu.items[4], 'menu.items[4] is focused');
               done();
             });
           });
@@ -268,7 +272,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             Polymer.Base.async(function() {
               var focusedItem = Polymer.dom(menu).node.focusedItem;
-              assert.equal(focusedItem, menu.items[3], 'menu.items[3] is focused');
+              assert.equal(focusedItem, menu.items[4], 'menu.items[4] is focused');
               done();
             });
           });
@@ -286,7 +290,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
             Polymer.Base.async(function() {
               var focusedItem = Polymer.dom(menu).node.focusedItem;
-              assert.equal(focusedItem, menu.items[3], 'menu.items[3] is focused');
+              assert.equal(focusedItem, menu.items[4], 'menu.items[4] is focused');
               done();
             });
           });

@@ -67,7 +67,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     attached: function() {
-      this._resetTabindices();
+      this._resetItemAttributes();
     },
 
     /**
@@ -90,16 +90,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     },
 
     /**
-     * Resets all tabindex attributes to the appropriate value based on the
+     * Reset attributes of the menu's new/changed collection of items:
+     *
+     * Reset all tabindex attributes to the appropriate value based on the
      * current selection state. The appropriate value is `0` (focusable) for
      * the default selected item, and `-1` (not keyboard focusable) for all
      * other items.
+     *
+     * Reset the aria-selected attribute based on the current selection state.
+     * As _applySelection notes, we need to set aria-selected to false for
+     * unselected items, even in their initial state, not just when they become
+     * deselected.
      */
-    _resetTabindices: function() {
+    _resetItemAttributes: function() {
       var selectedItem = this.multi ? (this.selectedItems && this.selectedItems[0]) : this.selectedItem;
 
       this.items.forEach(function(item) {
-        item.setAttribute('tabindex', item === selectedItem ? '0' : '-1');
+        var isSelected = item === selectedItem;
+        item.setAttribute('tabindex', isSelected ? '0' : '-1');
+        item.setAttribute('aria-selected', isSelected);
       }, this);
     },
 
@@ -193,11 +202,10 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * selected state, otherwise false.
      */
     _applySelection: function(item, isSelected) {
-      if (isSelected) {
-        item.setAttribute('aria-selected', 'true');
-      } else {
-        item.removeAttribute('aria-selected');
-      }
+      // Per the ARIA spec at https://www.w3.org/TR/wai-aria-1.1/#tab:
+      // "inactive tab elements [should] have their aria-selected attribute set
+      // to false".
+      item.setAttribute('aria-selected', isSelected);
       Polymer.IronSelectableBehavior._applySelection.apply(this, arguments);
     },
 
@@ -226,7 +234,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      */
     _onIronItemsChanged: function(event) {
       if (event.detail.addedNodes.length) {
-        this._resetTabindices();
+        console.log('iron-menu-behavior: _onIronItemsChanged');
+        this._resetItemAttributes();
       }
     },
 

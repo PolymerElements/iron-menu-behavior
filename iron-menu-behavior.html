@@ -98,8 +98,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * other items.
      *
      * Reset the aria-selected attribute based on the current selection state.
-     * As _applySelection notes, we need to set aria-selected to false to items,
-     * even in their initial state, not just when they become deselected.
+     * As _applySelection notes, we need to set aria-selected to false for
+     * unselected items, even in their initial state, not just when they become
+     * deselected.
      */
     _resetItemAttributes: function() {
       var selectedItem = this.multi ? (this.selectedItems && this.selectedItems[0]) : this.selectedItem;

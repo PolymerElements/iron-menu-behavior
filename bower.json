@@ -1,6 +1,6 @@
 {
   "name": "iron-menu-behavior",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "description": "Provides accessible menu behavior",
   "authors": "The Polymer Authors",
   "keywords": [
@@ -22,16 +22,26 @@
   "homepage": "https://github.com/PolymerElements/iron-menu-behavior",
   "ignore": [],
   "dependencies": {
-    "iron-selector": "PolymerElements/iron-selector#^1.0.0",
-    "polymer": "Polymer/polymer#^1.2.4",
-    "iron-a11y-keys-behavior": "polymerelements/iron-a11y-keys-behavior#^1.0.0"
+    "iron-selector": "PolymerElements/iron-selector#2.0-preview",
+    "polymer": "Polymer/polymer#2.0-preview",
+    "iron-a11y-keys-behavior": "PolymerElements/iron-a11y-keys-behavior#2.0-preview",
+    "iron-flex-layout": "PolymerElements/iron-flex-layout#2.0-preview"
   },
   "devDependencies": {
-    "paper-styles": "polymerelements/paper-styles#^1.0.2",
+    "paper-styles": "PolymerElements/paper-styles#2.0-preview",
     "iron-component-page": "PolymerElements/iron-component-page#^1.0.0",
-    "iron-test-helpers": "polymerelements/iron-test-helpers#^1.0.0",
-    "test-fixture": "PolymerElements/test-fixture#^1.0.0",
+    "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
+    "test-fixture": "PolymerElements/test-fixture#custom-elements-v1",
     "web-component-tester": "^4.0.0",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#v1"
+  },
+  "resolutions": {
+    "iron-flex-layout": "2.0-preview",
+    "iron-selector": "2.0-preview",
+    "polymer": "2.0-preview",
+    "paper-styles": "2.0-preview",
+    "iron-a11y-keys-behavior": "2.0-preview",
+    "test-fixture": "custom-elements-v1",
+    "webcomponentsjs": "v1"
   }
 }

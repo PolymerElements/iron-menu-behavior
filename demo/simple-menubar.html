@@ -15,13 +15,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <dom-module id="simple-menubar">
   <template>
     <style>
-      :host ::slotted(.iron-selected) {
-        color: white;
-        background-color: var(--google-red-500);
+      ::slotted(*) {
+        display: inline-block;
       }
 
-      :host ::slotted(*) {
-        display: inline-block;
+      ::slotted(.iron-selected) {
+        color: white;
+        background-color: var(--google-red-500);
       }
     </style>
 

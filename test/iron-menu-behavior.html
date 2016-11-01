@@ -434,7 +434,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               done();
             });
           });
+        });
 
+        test('keypress which does not focus item does not stop event propagation', function(done) {
+          var menu = fixture('multi');
+          MockInteractions.focus(menu);
+
+          var onKeyDown = false;
+          menu.parentElement.addEventListener("keydown", function(event) {
+            onKeyDown = true;
+	  });
+
+          // Wait for async focus
+          Polymer.Base.async(function() {
+            // Key press 'u'
+            MockInteractions.keyDownOn(menu, 85);
+
+            Polymer.Base.async(function() {
+              var focusedItem = Polymer.dom(menu).node.focusedItem;
+              assert.equal(focusedItem, menu.items[0], 'menu.items[0] is still focused');       
+              assert.equal(onKeyDown, true);       
+              done();
+            });
+          });
         });
 
         test('focusing non-item content does not auto-focus an item', function(done) {

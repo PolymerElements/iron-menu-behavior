@@ -437,6 +437,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           });
         });
 
+        test('`disableKeyboardSearch` allows non-navigation keyboard events to propagate.', function(done) {
+          var menu = fixture('countries');
+          menu.disableKeyboardSearch = true;
+
+          MockInteractions.focus(menu);
+
+          // Wait for async focus
+          Polymer.Base.async(function() {
+            // Focus initially moves to the first item.
+            assert.equal(Polymer.dom(menu).node.focusedItem, menu.items[0], 'menu.items[0] is focused');
+
+            // Key press 'u'
+            MockInteractions.keyDownOn(menu, 85);
+
+            // Focus does not change for keyboard events.
+            assert.equal(Polymer.dom(menu).node.focusedItem, menu.items[0], 'menu.items[0] is focused');
+
+            // Key press 'g'
+            MockInteractions.keyDownOn(menu, 71);
+
+            Polymer.Base.async(function() {
+              // Focus does not change for keyboard events.
+              assert.equal(Polymer.dom(menu).node.focusedItem, menu.items[0], 'menu.items[0] is focused');
+              done();
+            });
+          });
+        });
+
         test('focusing on item with bogus attr-for-item-title', function(done) {
           var menu = fixture('bogus-attr-for-item-title');
           MockInteractions.focus(menu);

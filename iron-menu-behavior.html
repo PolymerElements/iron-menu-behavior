@@ -48,6 +48,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         value: false,
         observer: '_disabledChanged',
       },
+
+      /**
+       * Setting this attribute to true will prevent keyboard events from
+       * causing the menu items to be searched and will allow all keyboard
+       * events except those used for menu navigation to continue propagating.
+       */
+      disableKeyboardSearch: {
+        type: Boolean,
+        value: false,
+      }
     },
 
     _SEARCH_RESET_TIMEOUT_MS: 1000,
@@ -357,11 +367,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @param {KeyboardEvent} event A keyboard event.
      */
     _onKeydown: function(event) {
-      if (!this.keyboardEventMatchesKeys(event, 'up down esc')) {
-        // all other keys focus the menu item starting with that character
-        this._focusWithKeyboardEvent(event);
+      if (this.disableKeyboardSearch) {
+        // Stop only keyboard navigation events.
+        if (this.keyboardEventMatchesKeys(event, 'up down esc')) {
+          event.stopPropagation();
+        }
+      } else {
+        // Attempt to focus with any non-navigation keyboard event.
+        if (!this.keyboardEventMatchesKeys(event, 'up down esc')) {
+          this._focusWithKeyboardEvent(event);
+        }
+        event.stopPropagation();
       }
-      event.stopPropagation();
     },
 
     // override _activateHandler

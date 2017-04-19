@@ -131,6 +131,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * menu (if there is a relevant item, and it is possible to focus it).
      *
      * @param {KeyboardEvent} event A KeyboardEvent.
+     * @return {boolean} Whether an item was focused.
      */
     _focusWithKeyboardEvent: function(event) {
       this.cancelDebouncer('_clearSearchText');
@@ -141,6 +142,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       searchText += key.toLocaleLowerCase();
 
       var searchLength = searchText.length;
+      var itemWasFocused = false;
 
       for (var i = 0, item; item = this.items[i]; i++) {
         if (item.hasAttribute('disabled')) {
@@ -156,6 +158,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         if (title.slice(0, searchLength).toLocaleLowerCase() == searchText) {
           this._setFocusedItem(item);
+          itemWasFocused = true;
           break;
         }
       }
@@ -163,6 +166,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       this._searchText = searchText;
       this.debounce('_clearSearchText', this._clearSearchText,
                     this._SEARCH_RESET_TIMEOUT_MS);
+      return itemWasFocused;
     },
 
     _clearSearchText: function() {
@@ -359,9 +363,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     _onKeydown: function(event) {
       if (!this.keyboardEventMatchesKeys(event, 'up down esc')) {
         // all other keys focus the menu item starting with that character
-        this._focusWithKeyboardEvent(event);
+        if (this._focusWithKeyboardEvent(event)) {
+          event.stopPropagation();
+        }
+      } else {
+        event.stopPropagation();
       }
-      event.stopPropagation();
     },
 
     // override _activateHandler

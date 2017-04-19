@@ -506,7 +506,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               var menuOwnerRoot = Polymer.dom(menu.extraContent).getOwnerRoot() || document;
               var menuActiveElement = Polymer.dom(menuOwnerRoot).activeElement;
               assert.equal(menuActiveElement, menu.extraContent, 'menu.extraContent is focused');
-              assert.equal(document._activeElement || Polymer.dom(document).activeElement, menu, 'menu is document.activeElement');
+              assert.equal(Polymer.dom(document).activeElement, menu, 'menu is document.activeElement');
               done();
             });
           });

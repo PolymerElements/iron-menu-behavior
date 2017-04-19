@@ -14,5 +14,5 @@ _[Demo and API docs](https://elements.polymer-project.org/elements/iron-menu-beh
 ### Notable breaking changes between 1.x and 2.x (hybrid):
 
 IronSelectableBehavior and IronMultiSelectableBehavior, which are used by
-iron-menu-behavior, introduce multiple breaking changes. Please see the README
-for those behaviors for more detail.
+IronMenuBehavior and IronMenubarBehavior, introduce multiple breaking changes.
+Please see the README for those behaviors for more detail.

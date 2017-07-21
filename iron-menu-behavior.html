@@ -133,6 +133,25 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
      * @param {KeyboardEvent} event A KeyboardEvent.
      */
     _focusWithKeyboardEvent: function(event) {
+      // Make sure that the key pressed is not a modifier key. The list of keys
+      // has been taken from https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
+      if (event.key == "Alt" ||
+          event.key == "AltGraph" ||
+          event.key == "CapsLock" ||
+          event.key == "Control" ||
+          event.key == "Fn" ||
+          event.key == "FnLock" ||
+          event.key == "Hyper" ||
+          event.key == "Meta" ||
+          event.key == "NumLock" ||
+          event.key == "OS" ||
+          event.key == "ScrollLock" ||
+          event.key == "Shift" ||
+          event.key == "Super" ||
+          event.key == "Symbol" ||
+          event.key == "SymbolLock")
+        return;
+
       this.cancelDebouncer('_clearSearchText');
 
       var searchText = this._searchText || '';

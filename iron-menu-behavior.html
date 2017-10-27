@@ -33,6 +33,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         readOnly: true,
         type: Object
       },
+      
+      /**
+       * Prevents the selected list item from stealing focus.
+       */
+      preventFocusOnItemChanged: {
+        type: Boolean
+      },
 
       /**
        * The attribute to use on menu items to look up the item title. Typing the first
@@ -272,7 +279,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       old && old.setAttribute('tabindex', '-1');
       if (focusedItem && !focusedItem.hasAttribute('disabled') && !this.disabled) {
         focusedItem.setAttribute('tabindex', '0');
-        focusedItem.focus();
+        if (!this.preventFocusOnItemChanged) {
+          focusedItem.focus();
+        }
       }
     },
 

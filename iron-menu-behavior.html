@@ -389,7 +389,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         // all other keys focus the menu item starting with that character
         this._focusWithKeyboardEvent(event);
       }
-      event.stopPropagation();
+      if (this.stopKeyboardEventPropagation) event.stopPropagation();
     },
 
     // override _activateHandler

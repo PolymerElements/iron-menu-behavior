@@ -708,6 +708,29 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
             });
           });
         });
+
+        test('aria-selected attribute for items defaults to false', function() {
+          var menu = fixture('basic');
+          var selectedValues = menu.items.map(function(item) {
+            return item.getAttribute('aria-selected');
+          });
+          assert.deepEqual(selectedValues, ['false', 'false', 'false']);
+        });
+
+        test('aria-selected attribute reflects item selection state', function() {
+          var menu = fixture('basic');
+          var item0 = menu.items[0];
+          var item1 = menu.items[1];
+          assert.equal(item0.getAttribute('aria-selected'), 'false');
+          assert.equal(item1.getAttribute('aria-selected'), 'false');
+          menu.selected = 0;
+          assert.equal(item0.getAttribute('aria-selected'), 'true');
+          assert.equal(item1.getAttribute('aria-selected'), 'false');
+          menu.selected = 1;
+          assert.equal(item0.getAttribute('aria-selected'), 'false');
+          assert.equal(item1.getAttribute('aria-selected'), 'true');
+        });
+
       });
     </script>
   </body>

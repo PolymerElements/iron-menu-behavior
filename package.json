@@ -1,0 +1,10 @@
+{
+  "name": "@polymer/iron-menu-behavior",
+  "private": true,
+  "description": "Provides accessible menu behavior",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/iron-menu-behavior"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt"
+}

@@ -16,7 +16,7 @@ declare namespace Polymer {
   /**
    * `Polymer.IronMenubarBehavior` implements accessible menubar behavior.
    */
-  interface IronMenubarBehavior {
+  interface IronMenubarBehavior extends Polymer.IronMenuBehavior {
     keyBindings: object|null;
     hostAttributes: object|null;
     _onUpKey(event: any): any;

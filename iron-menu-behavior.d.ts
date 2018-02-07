@@ -17,7 +17,7 @@ declare namespace Polymer {
   /**
    * `Polymer.IronMenuBehavior` implements accessible menu behavior.
    */
-  interface IronMenuBehavior {
+  interface IronMenuBehavior extends Polymer.IronMultiSelectableBehavior, Polymer.IronA11yKeysBehavior {
     keyBindings: object|null;
 
     /**

@@ -34,13 +34,13 @@ declare namespace Polymer {
     disabled: boolean|null|undefined;
 
     /**
-     * https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
+     *  https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
      */
     _MODIFIER_KEYS: any[]|null;
     _SEARCH_RESET_TIMEOUT_MS: number;
     _previousTabIndex: number;
     hostAttributes: object|null;
-    attached(): any;
+    attached(): void;
 
     /**
      * Selects the given value. If the `multi` property is true, then the selected state of the
@@ -48,7 +48,7 @@ declare namespace Polymer {
      *
      * @param value the value to select.
      */
-    select(value: string|number): any;
+    select(value: string|number): void;
 
     /**
      * Mutates items in the menu based on provided selection details, so that
@@ -58,12 +58,12 @@ declare namespace Polymer {
      * @param isSelected True if the item should be shown in a
      * selected state, otherwise false.
      */
-    _applySelection(item: Element|null, isSelected: boolean): any;
+    _applySelection(item: Element|null, isSelected: boolean): void;
 
     /**
      * override _activateHandler
      */
-    _activateHandler(event: any): any;
+    _activateHandler(event: any): void;
 
     /**
      * Resets all tabindex attributes to the appropriate value based on the
@@ -71,7 +71,7 @@ declare namespace Polymer {
      * the default selected item, and `-1` (not keyboard focusable) for all
      * other items.
      */
-    _resetTabindices(): any;
+    _resetTabindices(): void;
 
     /**
      * Sets appropriate ARIA based on whether or not the menu is meant to be
@@ -79,7 +79,7 @@ declare namespace Polymer {
      *
      * @param multi True if the menu should be multi-selectable.
      */
-    _updateMultiselectable(multi: boolean): any;
+    _updateMultiselectable(multi: boolean): void;
 
     /**
      * Given a KeyboardEvent, this method will focus the appropriate item in the
@@ -87,22 +87,22 @@ declare namespace Polymer {
      *
      * @param event A KeyboardEvent.
      */
-    _focusWithKeyboardEvent(event: KeyboardEvent|null): any;
-    _clearSearchText(): any;
+    _focusWithKeyboardEvent(event: KeyboardEvent|null): void;
+    _clearSearchText(): void;
 
     /**
      * Focuses the previous item (relative to the currently focused item) in the
      * menu, disabled items will be skipped.
      * Loop until length + 1 to handle case of single item in menu.
      */
-    _focusPrevious(): any;
+    _focusPrevious(): void;
 
     /**
      * Focuses the next item (relative to the currently focused item) in the
      * menu, disabled items will be skipped.
      * Loop until length + 1 to handle case of single item in menu.
      */
-    _focusNext(): any;
+    _focusNext(): void;
 
     /**
      * Discretely updates tabindex values among menu items as the focused item
@@ -112,7 +112,7 @@ declare namespace Polymer {
      * @param old The last element that was considered focused, if
      * applicable.
      */
-    _focusedItemChanged(focusedItem: Element|null, old: Element|null): any;
+    _focusedItemChanged(focusedItem: Element|null, old: Element|null): void;
 
     /**
      * A handler that responds to mutation changes related to the list of items
@@ -121,54 +121,54 @@ declare namespace Polymer {
      * @param event An event containing mutation records as its
      * detail.
      */
-    _onIronItemsChanged(event: CustomEvent|null): any;
+    _onIronItemsChanged(event: CustomEvent|null): void;
 
     /**
      * Handler that is called when a shift+tab keypress is detected by the menu.
      *
      * @param event A key combination event.
      */
-    _onShiftTabDown(event: CustomEvent|null): any;
+    _onShiftTabDown(event: CustomEvent|null): void;
 
     /**
      * Handler that is called when the menu receives focus.
      *
      * @param event A focus event.
      */
-    _onFocus(event: FocusEvent|null): any;
+    _onFocus(event: FocusEvent|null): void;
 
     /**
      * Handler that is called when the up key is pressed.
      *
      * @param event A key combination event.
      */
-    _onUpKey(event: CustomEvent|null): any;
+    _onUpKey(event: CustomEvent|null): void;
 
     /**
      * Handler that is called when the down key is pressed.
      *
      * @param event A key combination event.
      */
-    _onDownKey(event: CustomEvent|null): any;
+    _onDownKey(event: CustomEvent|null): void;
 
     /**
      * Handler that is called when the esc key is pressed.
      *
      * @param event A key combination event.
      */
-    _onEscKey(event: CustomEvent|null): any;
+    _onEscKey(event: CustomEvent|null): void;
 
     /**
      * Handler that is called when a keydown event is detected.
      *
      * @param event A keyboard event.
      */
-    _onKeydown(event: KeyboardEvent|null): any;
+    _onKeydown(event: KeyboardEvent|null): void;
 
     /**
      * Updates this element's tab index when it's enabled/disabled.
      */
-    _disabledChanged(disabled: boolean): any;
+    _disabledChanged(disabled: boolean): void;
   }
 
   const IronMenuBehavior: object;

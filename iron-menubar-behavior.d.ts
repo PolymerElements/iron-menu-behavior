@@ -19,12 +19,12 @@ declare namespace Polymer {
   interface IronMenubarBehavior extends Polymer.IronMenuBehavior {
     keyBindings: object|null;
     hostAttributes: object|null;
-    _onUpKey(event: any): any;
-    _onDownKey(event: any): any;
-    _onKeydown(event: any): any;
-    _isRTL(): any;
-    _onLeftKey(event: any): any;
-    _onRightKey(event: any): any;
+    readonly _isRTL: any;
+    _onUpKey(event: any): void;
+    _onDownKey(event: any): void;
+    _onKeydown(event: any): void;
+    _onLeftKey(event: any): void;
+    _onRightKey(event: any): void;
   }
 
   const IronMenubarBehavior: object;

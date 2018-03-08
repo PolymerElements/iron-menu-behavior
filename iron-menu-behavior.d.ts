@@ -18,7 +18,7 @@ declare namespace Polymer {
    * `Polymer.IronMenuBehavior` implements accessible menu behavior.
    */
   interface IronMenuBehavior extends Polymer.IronMultiSelectableBehavior, Polymer.IronA11yKeysBehavior {
-    keyBindings: object|null;
+    keyBindings: object;
 
     /**
      * Returns the currently focused item.
@@ -31,14 +31,7 @@ declare namespace Polymer {
      * will be used.
      */
     attrForItemTitle: string|null|undefined;
-    disabled: boolean|null|undefined;
-
-    /**
-     *  https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/getModifierState
-     */
-    _MODIFIER_KEYS: any[]|null;
-    _SEARCH_RESET_TIMEOUT_MS: number;
-    _previousTabIndex: number;
+    disabled: boolean;
     hostAttributes: object|null;
     attached(): void;
 

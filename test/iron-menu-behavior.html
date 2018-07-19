@@ -18,11 +18,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
 
 
-    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
-    <script src="../../../wct-browser-legacy/browser.js"></script>
-    <script src="../../iron-test-helpers/mock-interactions.js" type="module"></script>
-    <script type="module" src="./test-menu.js"></script>
-    <script type="module" src="./test-nested-menu.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../node_modules/wct-browser-legacy/browser.js"></script>
 
     <style>
       .ghost, [hidden] {
@@ -157,6 +154,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </test-fixture>
 
     <script type="module">
+      import '@polymer/iron-test-helpers/mock-interactions.js';
       import './test-menu.js';
       import './test-nested-menu.js';
 

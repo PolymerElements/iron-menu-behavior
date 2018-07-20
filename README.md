@@ -4,8 +4,8 @@
 
 ## `IronMenuBehavior`, `IronMenubarBehavior`
 
-`Polymer.IronMenuBehavior` and `Polymer.IronMenubarBehavior` implement
-accessible menu and menubar behaviors.
+`IronMenuBehavior` and `IronMenubarBehavior` implement accessible menu and
+menubar behaviors.
 
 See: [Documentation](https://www.webcomponents.org/element/@polymer/iron-menu-behavior),
   [Demo](https://www.webcomponents.org/element/@polymer/iron-menu-behavior/demo/demo/index.html).

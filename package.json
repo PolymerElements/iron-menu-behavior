@@ -24,9 +24,7 @@
     "format": "webmat"
   },
   "version": "3.0.0-pre.20",
-  "contributors": [
-    "The Polymer Authors"
-  ],
+  "author": "The Polymer Authors",
   "dependencies": {
     "@polymer/iron-selector": "^3.0.0-pre.20",
     "@polymer/polymer": "^3.0.0",

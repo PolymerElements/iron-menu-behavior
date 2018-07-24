@@ -49,6 +49,25 @@ class SimpleMenu extends mixinBehaviors(IronMenuBehavior, PolymerElement) {
 customElements.define('simple-menu', SimpleMenu);
 ```
 
+Then, in your HTML:
+
+```html
+<script type="module" src="./simple-menu.js"></script>
+
+<style>
+simple-menu .iron-selected {
+  background-color: blue;
+  color: white;
+}
+</style>
+
+<simple-menu>
+  <div role="menuitem">Item 0</div>
+  <div role="menuitem">Item 1</div>
+  <div role="menuitem" disabled aria-disabled="true">Item 2 (disabled)</div>
+</simple-menu>
+```
+
 ## Contributing
 
 If you want to send a PR to this element, here are the instructions for running

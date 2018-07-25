@@ -25,11 +25,11 @@ Polymer({
     </style>
     <test-menu id="actualMenu">
       <div>item 1</div>
-      <div hidden="">item 2</div>
+      <div hidden>item 2</div>
       <div class="ghost">item 3</div>
       <div class="invisible">item 3.1</div>
       <div>item 4</div>
-      <div hidden="">item 5</div>
+      <div hidden>item 5</div>
       <div class="ghost">item 6</div>
     </test-menu>
 `,

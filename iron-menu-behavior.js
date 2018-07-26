@@ -1,18 +1,19 @@
 /**
 @license
 Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
 */
 import '@polymer/polymer/polymer-legacy.js';
 
-import { IronMultiSelectableBehaviorImpl, IronMultiSelectableBehavior } from '@polymer/iron-selector/iron-multi-selectable.js';
-import { IronA11yKeysBehavior } from '@polymer/iron-a11y-keys-behavior/iron-a11y-keys-behavior.js';
-import { dom } from '@polymer/polymer/lib/legacy/polymer.dom.js';
-import { IronSelectableBehavior } from '@polymer/iron-selector/iron-selectable.js';
+import {IronA11yKeysBehavior} from '@polymer/iron-a11y-keys-behavior/iron-a11y-keys-behavior.js';
+import {IronMultiSelectableBehavior, IronMultiSelectableBehaviorImpl} from '@polymer/iron-selector/iron-multi-selectable.js';
+import {IronSelectableBehavior} from '@polymer/iron-selector/iron-selectable.js';
+import {dom} from '@polymer/polymer/lib/legacy/polymer.dom.js';
 
 /**
  * `Polymer.IronMenuBehavior` implements accessible menu behavior.
@@ -432,8 +433,5 @@ export const IronMenuBehaviorImpl = {
 IronMenuBehaviorImpl._shiftTabPressed = false;
 
 /** @polymerBehavior Polymer.IronMenuBehavior */
-export const IronMenuBehavior = [
-  IronMultiSelectableBehavior,
-  IronA11yKeysBehavior,
-  IronMenuBehaviorImpl
-];
+export const IronMenuBehavior =
+    [IronMultiSelectableBehavior, IronA11yKeysBehavior, IronMenuBehaviorImpl];

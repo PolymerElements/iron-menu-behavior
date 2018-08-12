@@ -13,9 +13,9 @@ import '@polymer/polymer/polymer-legacy.js';
 import {IronMenuBehavior} from './iron-menu-behavior.js';
 
 /**
- * `Polymer.IronMenubarBehavior` implements accessible menubar behavior.
+ * `IronMenubarBehavior` implements accessible menubar behavior.
  *
- * @polymerBehavior Polymer.IronMenubarBehavior
+ * @polymerBehavior IronMenubarBehavior
  */
 export const IronMenubarBehaviorImpl = {
 
@@ -69,5 +69,5 @@ export const IronMenubarBehaviorImpl = {
 
 };
 
-/** @polymerBehavior Polymer.IronMenubarBehavior */
+/** @polymerBehavior */
 export const IronMenubarBehavior = [IronMenuBehavior, IronMenubarBehaviorImpl];

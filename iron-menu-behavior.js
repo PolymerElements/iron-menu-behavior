@@ -16,10 +16,10 @@ import {IronSelectableBehavior} from '@polymer/iron-selector/iron-selectable.js'
 import {dom} from '@polymer/polymer/lib/legacy/polymer.dom.js';
 
 /**
- * `Polymer.IronMenuBehavior` implements accessible menu behavior.
+ * `IronMenuBehavior` implements accessible menu behavior.
  *
  * @demo demo/index.html
- * @polymerBehavior Polymer.IronMenuBehavior
+ * @polymerBehavior IronMenuBehavior
  */
 export const IronMenuBehaviorImpl = {
 
@@ -432,6 +432,6 @@ export const IronMenuBehaviorImpl = {
 
 IronMenuBehaviorImpl._shiftTabPressed = false;
 
-/** @polymerBehavior Polymer.IronMenuBehavior */
+/** @polymerBehavior */
 export const IronMenuBehavior =
     [IronMultiSelectableBehavior, IronA11yKeysBehavior, IronMenuBehaviorImpl];

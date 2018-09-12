@@ -15,8 +15,8 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "webmat": "^0.2.0",
-    "@polymer/paper-styles": "^3.0.0-pre.24",
-    "@polymer/iron-test-helpers": "^3.0.0-pre.24",
+    "@polymer/paper-styles": "^3.0.0-pre.25",
+    "@polymer/iron-test-helpers": "^3.0.0-pre.25",
     "wct-browser-legacy": "^1.0.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "@polymer/gen-typescript-declarations": "^1.5.1"
@@ -29,9 +29,9 @@
   "version": "3.0.0-pre.25",
   "author": "The Polymer Authors",
   "dependencies": {
-    "@polymer/iron-selector": "^3.0.0-pre.24",
+    "@polymer/iron-selector": "^3.0.0-pre.25",
     "@polymer/polymer": "^3.0.0",
-    "@polymer/iron-a11y-keys-behavior": "^3.0.0-pre.24",
-    "@polymer/iron-flex-layout": "^3.0.0-pre.24"
+    "@polymer/iron-a11y-keys-behavior": "^3.0.0-pre.25",
+    "@polymer/iron-flex-layout": "^3.0.0-pre.25"
   }
 }

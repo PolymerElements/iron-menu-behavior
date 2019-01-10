@@ -129,7 +129,8 @@ export const IronMenuBehaviorImpl = {
    * Resets all tabindex attributes to the appropriate value based on the
    * current selection state. The appropriate value is `0` (focusable) for
    * the default selected item, and `-1` (not keyboard focusable) for all
-   * other items.
+   * other items. Also sets the correct initial values for aria-selected
+   * attribute, true for default selected item and false for others.
    */
   _resetTabindices: function() {
     var selectedItem = this.multi ?
@@ -138,6 +139,7 @@ export const IronMenuBehaviorImpl = {
 
     this.items.forEach(function(item) {
       item.setAttribute('tabindex', item === selectedItem ? '0' : '-1');
+      this._applySelection(item, item === selectedItem);
     }, this);
   },
 
@@ -267,7 +269,7 @@ export const IronMenuBehaviorImpl = {
     if (isSelected) {
       item.setAttribute('aria-selected', 'true');
     } else {
-      item.removeAttribute('aria-selected');
+      item.setAttribute('aria-selected', 'false');
     }
     IronSelectableBehavior._applySelection.apply(this, arguments);
   },

@@ -139,7 +139,8 @@ export const IronMenuBehaviorImpl = {
 
     this.items.forEach(function(item) {
       item.setAttribute('tabindex', item === selectedItem ? '0' : '-1');
-      this._applySelection(item, item === selectedItem);
+      item.setAttribute(
+          'aria-selected', item === selectedItem ? 'true' : 'false');
     }, this);
   },
 

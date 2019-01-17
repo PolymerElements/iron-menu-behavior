@@ -126,6 +126,20 @@ export const IronMenuBehaviorImpl = {
   },
 
   /**
+   * Checks if the given item is selected.
+   *
+   * @param {!Object} item the to check.
+   * @returns {boolean} Whether the item is selected.
+   */
+  _isSelected: function(item) {
+    if (this.multi) {
+      return this.selectedItems && this.selectedItems.includes(item);
+    } else {
+      return this.selectedItem == item;
+    }
+  },
+
+  /**
    * Resets all tabindex attributes to the appropriate value based on the
    * current selection state. The appropriate value is `0` (focusable) for
    * the default selected item, and `-1` (not keyboard focusable) for all
@@ -139,8 +153,7 @@ export const IronMenuBehaviorImpl = {
 
     this.items.forEach(function(item) {
       item.setAttribute('tabindex', item === selectedItem ? '0' : '-1');
-      item.setAttribute(
-          'aria-selected', item === selectedItem ? 'true' : 'false');
+      item.setAttribute('aria-selected', this._isSelected(item));
     }, this);
   },
 

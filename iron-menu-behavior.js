@@ -100,6 +100,7 @@ export const IronMenuBehaviorImpl = {
     'shift+tab:keydown': '_onShiftTabDown'
   },
 
+  /** @override */
   attached: function() {
     this._resetTabindices();
   },
